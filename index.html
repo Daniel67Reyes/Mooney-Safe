@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mooney Safe</title>
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-100 text-gray-800 font-inter">
+  
+  <!-- Barra superior -->
+  <header class="p-4 bg-white shadow-sm flex items-center justify-between">
+    <button id="menuBtn" class="p-2 rounded-full hover:bg-gray-200 transition-colors">
+      ☰
+    </button>
+    <h1 class="text-xl font-bold">Mooney Safe</h1>
+    <div class="w-8"></div>
+  </header>
+
+  <!-- Caja de mensajes -->
+  <div id="messageBox" class="hidden fixed top-20 left-1/2 -translate-x-1/2 z-50 p-4 bg-gray-800 text-white text-center rounded-lg shadow-lg"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-40">
+    <div class="flex justify-end p-4">
+      <button id="closeSidebar" class="p-2 rounded-full hover:bg-gray-200 transition-colors">✕</button>
+    </div>
+    <nav class="p-4 space-y-2">
+      <button data-view="dashboard" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">🏠 Dashboard</button>
+      <button data-view="add" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">➕ Agregar</button>
+      <button data-view="profile" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">👤 Perfil</button>
+      <button data-view="notifications" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">🔔 Notificaciones</button>
+      <button data-view="settings" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">⚙️ Configuración</button>
+      <button data-view="modifyHistory" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">✏️ Modificar historial</button>
+      <button data-view="extendedCharts" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">📊 Gráficas extendidas</button>
+      <button data-view="exportCsv" class="menu-btn w-full text-left p-3 rounded-lg hover:bg-gray-100">📤 Exportar</button>
+    </nav>
+  </aside>
+
+  <!-- Contenido dinámico -->
+  <main id="app" class="pt-16 p-4 sm:p-8"></main>
+
+  <!-- Librerías de graf extendidas -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script> 
+
+  <!-- Script principal -->
+  <script src="app.js"></script>
+
+</body>
+</html>
