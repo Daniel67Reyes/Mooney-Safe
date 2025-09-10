@@ -81,6 +81,32 @@ function filterByPeriod(dateStr) {
 }
 
 // =============================
+// Funciones de guardado y carga
+// =============================
+function saveData() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+  localStorage.setItem("categories", JSON.stringify(categories));
+  localStorage.serItem("userName", JSON.stringify(userName));
+  localStorage.serItem("userAge", JSON.stringify(userAge));
+  localStorage.serItem("userStatus", JSON.stringify(userStatus));
+}
+
+function loadData() {
+  const savedTransactions = localStorage.getItem("transactions");
+  const savedCategories = localStorage.getItem("categories");
+  const saveduserName = localStorage.getItem("userName");
+  const saveduserAge = localStorage.getItem("userAge");
+  const saveduserStatus = localStorage.getItem("userStatus");
+
+  if (savedTransactions) transactions = JSON.parse(savedTransactions);
+  if (savedCategories) categories = JSON.parse(savedCategories);
+  if (saveduserName) categories = JSON.parse(saveduserName);
+  if (saveduserAge) categories = JSON.parse(saveduserAge);
+  if (saveduserStatus) categories = JSON.parse(saveduserStatus);
+}
+
+
+// =============================
 // Navegación entre vistas
 // =============================
 let currentView = "dashboard";
@@ -321,6 +347,7 @@ function renderAddTransaction() {
     }
 
     renderAddTransaction();
+    saveData();
   };
 }
 
@@ -363,6 +390,7 @@ function renderProfile() {
         userAge = document.getElementById("userAge").value;
         userStatus = document.getElementById("userStatus").value;
         showMessage("Perfil actualizado.");
+        saveData();
     });
 }
 
@@ -538,6 +566,7 @@ function renderSettings() {
         categories.push({ name, color: selectedColor, type });
         showMessage("Categoría agregada.");
         renderSettings();
+        saveData();
     });
 
     // Manejar eliminación de categoría
@@ -547,6 +576,7 @@ function renderSettings() {
             categories = categories.filter(cat => cat.name !== nameToDelete);
             showMessage("Categoría eliminada.");
             renderSettings();
+          saveData();
         });
     });
 }
@@ -617,6 +647,7 @@ function renderModifyHistory() {
             transactions.splice(index, 1);
             showMessage("Transacción eliminada.");
             renderModifyHistory();
+            saveData();
         });
     });
 }
@@ -685,6 +716,7 @@ function renderEditForm(transaction, index) {
         transactions[index] = { ...transactions[index], title, amount, type, category, date: new Date(date).toISOString() };
         showMessage("Transacción actualizada con éxito.");
         renderModifyHistory();
+        saveData();
     };
 
     cancelBtn.onclick = () => {
@@ -1209,5 +1241,7 @@ function scheduleAutomaticExport() {
 document.addEventListener('DOMContentLoaded', () => {
     // ... (el resto de tu código de inicialización) ...
     scheduleAutomaticExport();
+    loadData();
     renderView();
 });
+
